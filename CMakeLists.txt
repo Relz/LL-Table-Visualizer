@@ -3,8 +3,13 @@ PROJECT(LLTableVisualizer)
 
 SET(CMAKE_CXX_STANDARD 17)
 
-ADD_SUBDIRECTORY(LLTableBuilderLibrary)
-
 ADD_EXECUTABLE(LLTableVisualizer main.cpp)
 
-TARGET_LINK_LIBRARIES(LLTableVisualizer LLTableBuilderLibrary)
+IF (NOT TARGET LLTableBuilderLibrary)
+	ADD_SUBDIRECTORY(LLTableBuilderLibrary)
+ENDIF ()
+IF (NOT TARGET TokenLibrary)
+	ADD_SUBDIRECTORY(TokenLibrary)
+ENDIF ()
+
+TARGET_LINK_LIBRARIES(LLTableVisualizer LLTableBuilderLibrary TokenLibrary)

@@ -1,6 +1,7 @@
 #include "LLTableBuilderLibrary/LLTableBuilder.h"
 #include "LLTableBuilderLibrary/Table/Table.h"
 #include "LLTableBuilderLibrary/Table/TableRow/TableRow.h"
+#include "TokenLibrary/TokenExtensions/TokenExtensions.h"
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -8,16 +9,16 @@
 const int REQUIRED_ARGC = 1;
 const std::string NO_ARGUMENT_ERROR = "Error: rule file is not specified";
 
-std::string SetToString(std::unordered_set<std::string> const & set)
+std::string SetToString(std::unordered_set<Token> const & set)
 {
 	if (set.empty())
 	{
 		return "";
 	}
 	std::string result;
-	for (std::string const & setElement : set)
+	for (Token setElement : set)
 	{
-		result += setElement;
+		result += TokenExtensions::ToString(setElement);
 		result.push_back(',');
 	}
 	result.erase(result.end() - 1);

@@ -1,5 +1,5 @@
-S-[id][=]<E>[#]/id
-S-[while]<E>[do]<S>[#]/while
-E-[id]<A>/id
-A-<e>/#,do
-A-[+]<E><A>/+
+S-[Identifier][Assignment]<E>[End of file]/Identifier
+S-[While keyword]<E>[Do keyword]<S>[End of file]/While keyword
+E-[Identifier]<A>/Identifier
+A-<e>/End of file,Do keyword
+A-[Plus]<E><A>/Plus

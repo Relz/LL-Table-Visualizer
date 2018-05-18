@@ -1,3 +1,6 @@
 [submodule "LLTableBuilderLibrary"]
 	path = LLTableBuilderLibrary
 	url = https://github.com/Relz/LL-Table-Builder-Library
+[submodule "TokenLibrary"]
+	path = TokenLibrary
+	url = https://github.com/Relz/Token-Library
