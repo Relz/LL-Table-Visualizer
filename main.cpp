@@ -61,7 +61,7 @@ void PrintTable(Table const & table, std::ostream & ostream)
 		actionNameColumnWidth = std::max(actionNameColumnWidth, tableRow->actionName.length());
 	}
 
-	ostream << "|Id|";
+	ostream << "| Id|";
 	ostream.width(referencingSetColumnWidth);
 	ostream << "ReferencingSet";
 	ostream << "|NextId|DoShift|PushToStack|IsError|IsEnd|";
@@ -69,7 +69,7 @@ void PrintTable(Table const & table, std::ostream & ostream)
 	ostream << "ActionName";
 	ostream << "|\n";
 	ostream << std::string(referencingSetColumnWidth, '-');
-	ostream << "-----------------------------------------------";
+	ostream << "------------------------------------------------";
 	ostream << std::string(actionNameColumnWidth, '-');
 	ostream << "\n";
 
@@ -79,7 +79,7 @@ void PrintTable(Table const & table, std::ostream & ostream)
 		TableRow * tableRow = tableElement.second;
 
 		ostream << "|";
-		ostream.width(2);
+		ostream.width(3);
 		ostream << tableRowId;
 		ostream.width(1);
 		ostream << "|";
