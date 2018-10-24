@@ -53,12 +53,25 @@ void PrintTable(Table const & table, std::ostream & ostream)
 				std::max(referencingSetColumnWidth, SetToString(tableRow->referencingSet).length());
 	}
 
+	size_t actionNameColumnWidth = 10;
+	for (auto const & tableElement : rows)
+	{
+		TableRow * tableRow = tableElement.second;
+
+		actionNameColumnWidth = std::max(actionNameColumnWidth, tableRow->actionName.length());
+	}
+
 	ostream << "|Id|";
 	ostream.width(referencingSetColumnWidth);
 	ostream << "ReferencingSet";
-	ostream << "|NextId|DoShift|PushToStack|IsError|IsEnd|\n";
+	ostream << "|NextId|DoShift|PushToStack|IsError|IsEnd|";
+	ostream.width(actionNameColumnWidth);
+	ostream << "ActionName";
+	ostream << "|\n";
 	ostream << std::string(referencingSetColumnWidth, '-');
-	ostream << "----------------------------------------------\n";
+	ostream << "-----------------------------------------------";
+	ostream << std::string(actionNameColumnWidth, '-');
+	ostream << "\n";
 
 	for (auto const & tableElement : rows)
 	{
@@ -92,6 +105,10 @@ void PrintTable(Table const & table, std::ostream & ostream)
 		ostream << "|";
 		ostream.width(5);
 		ostream << (tableRow->isEnd ? "+" : "-");
+		ostream.width(1);
+		ostream << "|";
+		ostream.width(actionNameColumnWidth);
+		ostream << tableRow->actionName;
 		ostream.width(1);
 		ostream << "|\n";
 	}
