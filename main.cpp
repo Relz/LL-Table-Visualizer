@@ -9,16 +9,33 @@
 const int REQUIRED_ARGC = 1;
 const std::string NO_ARGUMENT_ERROR = "Error: rule file is not specified";
 
-std::string SetToString(std::unordered_set<Token> const & set)
+std::string ContainerToString(std::unordered_set<Token> const & container)
 {
-	if (set.empty())
+	if (container.empty())
 	{
 		return "";
 	}
 	std::string result;
-	for (Token setElement : set)
+	for (Token containerElement : container)
 	{
-		result += TokenExtensions::ToString(setElement);
+		result += TokenExtensions::ToString(containerElement);
+		result.push_back(',');
+	}
+	result.erase(result.end() - 1);
+
+	return result;
+}
+
+std::string ContainerToString(std::vector<std::string> const & container)
+{
+	if (container.empty())
+	{
+		return "";
+	}
+	std::string result;
+	for (std::string const & containerElement : container)
+	{
+		result += containerElement;
 		result.push_back(',');
 	}
 	result.erase(result.end() - 1);
@@ -50,7 +67,7 @@ void PrintTable(Table const & table, std::ostream & ostream)
 		TableRow * tableRow = tableElement.second;
 
 		referencingSetColumnWidth =
-				std::max(referencingSetColumnWidth, SetToString(tableRow->referencingSet).length());
+				std::max(referencingSetColumnWidth, ContainerToString(tableRow->referencingSet).length());
 	}
 
 	size_t actionNameColumnWidth = 10;
@@ -66,7 +83,7 @@ void PrintTable(Table const & table, std::ostream & ostream)
 	ostream << "ReferencingSet";
 	ostream << "|NextId|DoShift|PushToStack|IsError|IsEnd|";
 	ostream.width(actionNameColumnWidth);
-	ostream << "ActionName";
+	ostream << "ActionNames";
 	ostream << "|\n";
 	ostream << std::string(referencingSetColumnWidth, '-');
 	ostream << "------------------------------------------------";
@@ -84,7 +101,7 @@ void PrintTable(Table const & table, std::ostream & ostream)
 		ostream.width(1);
 		ostream << "|";
 		ostream.width(referencingSetColumnWidth);
-		ostream << SetToString(tableRow->referencingSet);
+		ostream << ContainerToString(tableRow->referencingSet);
 		ostream.width(1);
 		ostream << "|";
 		ostream.width(6);
